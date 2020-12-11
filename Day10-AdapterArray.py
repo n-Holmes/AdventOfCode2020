@@ -15,13 +15,11 @@ def count_orders(values : list[int], max_diff : int) -> int:
     # Each element of options should be the sum of all prior elements
     # where the difference between the matching values in ordered is less than
     # max_diff
-    for i in range(1, len(ordered)):
-        j = i-1
-        while j >= 0:
-            if ordered[i] - ordered[j] > max_diff:
+    for i, val in enumerate(ordered[1:], 1):
+        for j in range(i-1, -1, -1):
+            if val - ordered[j] > max_diff:
                 break # difference too large
             options[i] += options[j]
-            j -= 1
     
     return options[-1]
 
