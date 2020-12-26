@@ -1,3 +1,5 @@
+from time import time
+
 to_ints = lambda s: map(int, s.split())
 
 def parse_rules(ruletext:str):
@@ -69,7 +71,9 @@ if __name__ == '__main__':
     with open('input19.txt') as f:
         rule_block, message_block = f.read().split("\n\n")
 
+    start = time()
     rules = parse_rules(rule_block)
     messages = message_block.strip().split("\n")
 
     print("Matching messages:", sum((is_match(m, rules) for m in messages)))
+    print("Took", time() - start)
